@@ -95,9 +95,6 @@ def train(argv=None):
     x_dev, y_dev = vectorize_data(word2id, intent2id, raw_dev_data, vec_size)
     raw_test_data = load_dev_test_data('TREC/test')
     x_test, y_test = vectorize_data(word2id, intent2id, raw_test_data, vec_size)
-    x_train = mean_normalize(x_train)
-    x_dev = mean_normalize(x_dev)
-    x_test = mean_normalize(x_test)
     print('vocab size:'+str(len(word2id)))
     config = model.CNNConfig
     cnn = model.IntentCNN(config, vec_size, len(intent2id), len(word2id))
@@ -120,7 +117,7 @@ def train(argv=None):
 
     total_batch = 0
     for epoch in range(config.num_epochs):
-        # print('Epoch:', epoch + 1)
+        #print('Epoch:', epoch + 1)
         batch_train = batch_iter(x_train, y_train)
         for x_batch, y_batch in batch_train:
             total_batch += 1
