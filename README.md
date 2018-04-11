@@ -29,7 +29,9 @@ optional arguments:
 Train:
 
 ```bash
-./train.py
+python3.6 cnn_cls.py --Train True --kernel stem_cnn
+using static wordembedding which learned by word2vec
+
 ```
 
 ## Evaluating
