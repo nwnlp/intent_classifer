@@ -21,7 +21,6 @@ optional arguments:
                        embedding cnn, multiem_cnn:static and non static
                        embedding cnn, svm:linear svm
   --train [TRAIN]      if True, begin to train
-  --notrain
   --data_dir DATA_DIR  Directory containing corpus
 
 ```
@@ -30,20 +29,35 @@ Train:
 
 ```bash
 python3.6 cnn_cls.py --Train True --kernel stem_cnn
-using static wordembedding which learned by word2vec
+using static word embedding which learned by word2vec as the input of cnn
+
+python3.6 cnn_cls.py --Train True --kernel nonstem_cnn
+using non static word embedding which learned by model itself as the input of cnn
+
+python3.6 cnn_cls.py --Train True --kernel multiem_cnn
+using non static word embedding and static word embedding as the input of cnn
+
+python3.6 cnn_cls.py --Train True --kernel svm
+using linear svm
 
 ```
 
 ## Evaluating
 
 ```bash
-./eval.py --eval_train --checkpoint_dir="./runs/1459637919/checkpoints/"
+python3.6 cnn_cls.py --Train False --kernel stem_cnn
+
+python3.6 cnn_cls.py --Train False --kernel nonstem_cnn
+
+python3.6 cnn_cls.py --Train False --kernel multiem_cnn
+
+python3.6 cnn_cls.py --Train False --kernel svm
+
 ```
 
-Replace the checkpoint dir with the output from the training. To use your own data, change the `eval.py` script to load your data.
+Defalut corpus dictory is atis, you can use --data_dir to use your own data
 
 
 ## References
 
 - [Convolutional Neural Networks for Sentence Classification](http://arxiv.org/abs/1408.5882)
-- [A Sensitivity Analysis of (and Practitioners' Guide to) Convolutional Neural Networks for Sentence Classification](http://arxiv.org/abs/1510.03820)
